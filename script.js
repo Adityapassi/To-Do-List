@@ -6,6 +6,12 @@ const checkBox = document.querySelectorAll(".checkbox")
 const deleteBtn=document.querySelectorAll(".delete")
 
 
+listItem.forEach(function(val){
+    console.log(val.classList.contains("checked"))
+})
+
+
+
 form.addEventListener("submit", (e) => {
     e.preventDefault()
     if (input.value === "") {
@@ -19,7 +25,7 @@ form.addEventListener("submit", (e) => {
     }
 
     input.value=""
-
+    saveData()
 })
 
 
@@ -31,21 +37,37 @@ list.addEventListener("click", function (e) {
         e.target.addEventListener("change", function (e) {
             if (this.checked) {
                 this.parentElement.classList.add("checked")
+                this.setAttribute("checked","checked")
+                saveData()
             }
             else {
                 this.parentElement.classList.remove("checked")
+                this.removeAttribute("checked")
+                saveData()
             }
+            saveData()
+            
         })
     }
 
     if(e.target.classList.contains("delete")){
       if(  confirm("Are You Sure ?")){
           e.target.parentElement.remove()
-
-      }
+        }
+        saveData()
         
     }
 })
+
+function saveData(){
+    localStorage.setItem("data",list.innerHTML)
+}
+
+function showData(){
+    list.innerHTML=localStorage.getItem("data")
+}
+
+showData()
 
 
 
