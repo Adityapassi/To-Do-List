@@ -59,9 +59,9 @@ list.addEventListener("click", function (e) {
     }
 })
 
-// function saveData(){
-//     localStorage.setItem("data",list.innerHTML)
-// }
+function saveData(){
+    localStorage.setItem("data",list.innerHTML)
+}
 
 function showData(){
     list.innerHTML=localStorage.getItem("data")
